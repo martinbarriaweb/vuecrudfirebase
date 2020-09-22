@@ -1,9 +1,15 @@
 <template>
-  <h1>editar</h1>
+  <h1>{{id}}</h1>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      id: this.$route.params.id,
+    };
+  },
+};
 </script>
 
 <style>
