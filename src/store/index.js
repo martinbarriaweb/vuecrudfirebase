@@ -5,17 +5,26 @@ import { db } from "../firebase";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    tasks: [],
+  },
+  mutations: {
+    setTasks(state, payload) {
+      state.tasks = payload;
+    },
+  },
   actions: {
     getTasks({ commit }) {
       db.collection("tarea")
         .get()
         .then((res) => {
+          const tasks = [];
           res.forEach((doc) => {
-            console.log(doc.id);
-            console.log(doc.data());
+            let task = doc.data();
+            task.id = doc.id;
+            tasks.push(task);
           });
+          commit("setTasks", tasks);
         });
     },
   },
