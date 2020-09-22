@@ -1,10 +1,18 @@
 <template>
-  <h1>Inicio</h1>
+  <div>
+    <h1>Inicio</h1>
+  </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
-  name: "INICIO",
+  methods: {
+    ...mapActions(["getTasks"]),
+  },
+  created() {
+    this.getTasks();
+  },
 };
 </script>
 
