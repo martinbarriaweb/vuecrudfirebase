@@ -56,6 +56,15 @@ export default new Vuex.Store({
           router.push("/");
         });
     },
+    addTask({ commit }, taskName) {
+      db.collection("tarea")
+        .add({
+          nombre: taskName,
+        })
+        .then(() => {
+          router.push("/");
+        });
+    },
   },
   modules: {},
 });
