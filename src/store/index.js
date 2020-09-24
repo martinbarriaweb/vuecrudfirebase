@@ -20,6 +20,10 @@ export default new Vuex.Store({
     setTask(state, payload) {
       state.task = payload;
     },
+    setDeleteTask(state, payload) {
+      console.log(payload);
+      state.tasks = state.tasks.filter((task) => task.id !== payload);
+    },
   },
   actions: {
     getTasks({ commit }) {
@@ -63,6 +67,14 @@ export default new Vuex.Store({
         })
         .then(() => {
           router.push("/");
+        });
+    },
+    deleteTask({ commit }, idTask) {
+      db.collection("tarea")
+        .doc(idTask)
+        .delete()
+        .then(() => {
+          commit("setDeleteTask", idTask);
         });
     },
   },

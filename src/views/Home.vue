@@ -6,10 +6,11 @@
     </router-link>
     <ul>
       <li v-for="(item, index) in tasks" :key="index">
-        {{item.nombre}} - {{item.id}}
-        <router-link :to="{name: 'Editar', params: {id: item.id}}">
+        {{ item.nombre }} - {{ item.id }}
+        <router-link :to="{ name: 'Editar', params: { id: item.id } }">
           <button>Editar</button>
         </router-link>
+        <button @click="deleteTask(item.id)">Eliminar</button>
       </li>
     </ul>
   </div>
@@ -20,6 +21,7 @@ import { mapActions, mapState } from "vuex";
 export default {
   methods: {
     ...mapActions(["getTasks"]),
+    ...mapActions(["deleteTask"]),
   },
   created() {
     this.getTasks();
